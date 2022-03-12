@@ -14,7 +14,8 @@ body {
     align-items: center;
     background: url(https://res.cloudinary.com/dyxe4g62g/image/upload/v1647027466/wp3491703-free-dark-textured-backgrounds_fa8cy7.jpg) no-repeat center;
     color: #fff;
-    font-family: 'Sansita Swashed', cursive;;
+    font-family: 'Sansita Swashed', cursive;
+    ;
 }
 
 .location,
@@ -33,7 +34,7 @@ body {
 .degree-section {
     display: flex;
     align-items: center;
-    cursor: pointer;
+
 }
 
 .degree-section span {

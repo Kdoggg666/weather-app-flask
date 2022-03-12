@@ -2,61 +2,69 @@
 {% block content %}
 
 <div class="location">
-    <h1 class="location-timezone">{{ city }}, {{ region }}, {{ country }}</h1>
-    <p>Icon</p>
+    <h1 class="location-timezone">No Data Found</h1>
+    <canvas class="icon" width="128" height="128"></canvas>
 
 </div>
 <div class="temperature">
     <div class="degree-section">
-        <h2 class="degree">{{ temp }}</h2>
+        <h2 class="degree">No Data Found</h2>
         <span>C</span>
-        <span>{{ user_ip_adr }}</span>
     </div>
-    <div class="temperature-description">{{ description }}</div>
+    <div class="temperature-description">No Data Found</div>
 </div>
 <script type="text/javascript">
-    window.addEventListener('load', ()=> {
-let long;
-let lat;
-let temperatureDescription = document.querySelector('.temperature-description');
-let temperatureDegree = document.querySelector('.degree');
-let locationTimezone = document.querySelector('.location-timezone');
+    window.addEventListener('load', () => {
+        let long;
+        let lat;
+        let temperatureDescription = document.querySelector('.temperature-description');
+        let temperatureDegree = document.querySelector('.degree');
+        let locationTimezone = document.querySelector('.location-timezone');
 
-if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition
-    (position => {
-        console.log(position);
-        long = position.coords.longitude;
-        lat = position.coords.latitude;
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                long = position.coords.longitude;
+                lat = position.coords.latitude;
 
-        $.get( "https://maps.googleapis.com/maps/api/geocode/json?latlng="+ position.coords.latitude + "," + position.coords.longitude +"&sensor=false&key={{ api_key }}", function(gmaps) {
-                console.log(gmaps);
-                var user_city = gmaps.results[6].formatted_address;
-                console.log(user_city);
-                locationTimezone.textContent = user_city;
-        })
-                
-    
-        // Call to the weather API with lat and long added to api address. 
-        const api = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${lat}%2C%20${long}?unitGroup=metric&key={{ weather_key }}&contentType=json`
-        
+                $.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.coords
+                    .latitude + "," + position.coords.longitude + "&sensor=false&key={{ api_key }}",
+                    function (gmaps) {
+                        var user_city = gmaps.results[6].formatted_address;
+                        locationTimezone.textContent = user_city;
+                    })
 
-        fetch(api)
-            .then(response => {
-                return response.json();
-            })
-            .then(data => {
-                console.log(data);
-                const {temp, conditions} = data.currentConditions;
 
-                // Set dom elements from json data
-                temperatureDegree.textContent = Math.round(temp); 
-                temperatureDescription.textContent = data.description;
-                
+                // Call to the weather API with lat and long added to api address. 
+                const api =
+                    `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${lat}%2C%20${long}?unitGroup=metric&key={{ weather_key }}&contentType=json`
+                    
+
+                fetch(api)
+                    .then(response => {
+                        return response.json();
+                    })
+                    .then(data => {
+                        const {
+                            temp,
+                            conditions,
+                            icon
+                        } = data.currentConditions;
+
+                        // Set dom elements from json data
+                        temperatureDegree.textContent = Math.round(temp);
+                        temperatureDescription.textContent = data.description;
+                        // Set icon
+                        setIcons(icon, document.querySelector('.icon'));
+                    });
             });
-    });
 
-}
-});
+        }
+        function setIcons(icon, iconID) {
+            const skycons = new Skycons({'color': 'white'});
+            const currentIcon = icon.replace(/-/g, "_").toUpperCase();
+            skycons.play();
+            return skycons.set(iconID, Skycons[currentIcon]);
+        }
+    });
 </script>
 {% endblock %}
