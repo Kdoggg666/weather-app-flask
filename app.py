@@ -33,7 +33,7 @@ def weather():
     App route to show weather application
     """
     ip = request.environ['REMOTE_ADDR']
-    g = geocoder.ipinfo('me')
+    g = geocoder.ipinfo('ip')
     print(g.ip)
     cur_lat = g.latlng[0]
     cur_lng = g.latlng[1]
