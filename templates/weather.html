@@ -2,16 +2,16 @@
 {% block content %}
 
 <div class="location">
-    <h1 class="location-timezone">No Data Found</h1>
+    <h1 class="location-timezone">Unfortunately we can't find your location, please try refresh the page or use an updated browser.</h1>
     <canvas class="icon" width="128" height="128"></canvas>
 
 </div>
 <div class="temperature">
     <div class="degree-section">
-        <h2 class="degree">No Data Found</h2>
+        <h2 class="degree"></h2>
         <span>C</span>
     </div>
-    <div class="temperature-description">No Data Found</div>
+    <div class="temperature-description"></div>
 </div>
 <script type="text/javascript">
     window.addEventListener('load', () => {
@@ -31,13 +31,15 @@
                     function (gmaps) {
                         var user_city = gmaps.results[6].formatted_address;
                         locationTimezone.textContent = user_city;
+                        console.log(gmaps.results[6].formatted_address);
+                        console.log(gmaps);
                     })
 
 
                 // Call to the weather API with lat and long added to api address. 
                 const api =
                     `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${lat}%2C%20${long}?unitGroup=metric&key={{ weather_key }}&contentType=json`
-                    
+
 
                 fetch(api)
                     .then(response => {
@@ -59,8 +61,11 @@
             });
 
         }
+
         function setIcons(icon, iconID) {
-            const skycons = new Skycons({'color': 'white'});
+            const skycons = new Skycons({
+                'color': 'white'
+            });
             const currentIcon = icon.replace(/-/g, "_").toUpperCase();
             skycons.play();
             return skycons.set(iconID, Skycons[currentIcon]);
