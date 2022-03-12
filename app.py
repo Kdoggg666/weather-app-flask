@@ -9,9 +9,6 @@ if os.path.exists("env.py"):
 
 app = Flask(__name__)
 
-app.config["WEATHER_API_KEY"] = os.environ.get("WEATHER_API_KEY")
-app.config["MAPS_API_KEY"] = os.environ.get("MAPS_API_KEY")
-weather_api_key = os.environ.get("WEATHER_API_KEY")
 app.secret_key = os.environ.get("SECRET_KEY")
 
 
