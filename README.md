@@ -65,7 +65,12 @@ Initially I planned to make this only using the front-end, I soon found that it 
 I was trying to resolve the location and make the API call on the server side. I ran into problems here as geolocation in python is limited to ip based and this was wildly inaccurate as well as only providing the server location and not the users location. I solved this by using JS in the front end to do the geolocation and the api calls. Using Jinja templates I was able to pass the api keys to the front-end without exposing them in version control or the live site. 
 
 I tested the site on various resolution screens, various mobile phones as well as chrome devtools to check responsiveness.
- 
+
+## Code Validation
+
+- HTML passed validation with no errors on [The W3 Nu HTML Checker](https://validator.w3.org/)
+- CSS passed validation with CSS level 3 + SVG on [The W3C CSS Validation Service](http://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fweather-app-flask-kenan.herokuapp.com%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=)
+- JS showed no errors using jshint.
 
 <a name="disclaimer"></a>
 ## Disclaimer
