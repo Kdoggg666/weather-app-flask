@@ -1,0 +1,9 @@
+click==8.0.4
+Flask==2.0.3
+future==0.18.2
+geocoder==1.38.1
+geographiclib==1.52
+geopy==2.2.0
+itsdangerous==2.1.1
+ratelim==0.1.6
+Werkzeug==2.0.3

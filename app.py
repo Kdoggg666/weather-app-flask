@@ -1,8 +1,6 @@
 import os
 import requests
-from flask import (
-                   Flask, flash, render_template,
-                   redirect, request, session, url_for)
+from flask import (Flask, render_template)
 from geopy.geocoders import Nominatim
 import geocoder
 
@@ -16,6 +14,7 @@ app = Flask(__name__)
 app.config["WEATHER_API_KEY"] = os.environ.get("WEATHER_API_KEY")
 app.config["MAPS_API_KEY"] = os.environ.get("MAPS_API_KEY")
 weather_api_key = os.environ.get("WEATHER_API_KEY")
+app.secret_key = os.environ.get("SECRET_KEY")
 
 
 def get_weather_results(city, api_key):
@@ -24,19 +23,18 @@ def get_weather_results(city, api_key):
     """
     api_url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&units=metric&appid={api_key}'
     r = requests.get(api_url)
-    print(r.json())
     return r.json()
-
 
 
 @app.route("/")
 @app.route("/weather")
-def recipes():
+def weather():
     """
     App route to show weather application
     """
     
-    g = geocoder.ip('me')
+    g = geocoder.ipinfo('me')
+    print(g.ip)
     cur_lat = g.latlng[0]
     cur_lng = g.latlng[1]
     geo_loc = Nominatim(user_agent="GetLoc")
@@ -52,13 +50,15 @@ def recipes():
     region = loc_dict['region']
     weather_data = get_weather_results('gothenburg', weather_api_key)
     temp = int(weather_data['main']['temp'])
+    description = weather_data['weather'][0]['description']
     return render_template('weather.html',
                            my_location=my_location,
                            locname=locname,
                            city=city,
                            country=country,
                            temp=temp,
-                           region=region)
+                           region=region,
+                           description=description)
 
 
 if __name__ == "__main__":
