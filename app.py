@@ -32,9 +32,9 @@ def weather():
     """
     App route to show weather application
     """
-    ip = request.environ['REMOTE_ADDR']
-    g = geocoder.ipinfo('ip')
-    print(g.ip)
+    user_ip_adr = request.environ['REMOTE_ADDR']
+    g = geocoder.ipinfo(f'{user_ip_adr}')
+    print(type(user_ip_adr))
     cur_lat = g.latlng[0]
     cur_lng = g.latlng[1]
     geo_loc = Nominatim(user_agent="GetLoc")
@@ -59,10 +59,10 @@ def weather():
                            temp=temp,
                            region=region,
                            description=description,
-                           ip=ip)
+                           user_ip_adr=user_ip_adr)
 
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=True)
+            debug=False)
