@@ -1,6 +1,6 @@
 import os
 import requests
-from flask import (Flask, render_template)
+from flask import (Flask, render_template, request)
 from geopy.geocoders import Nominatim
 import geocoder
 
@@ -32,7 +32,7 @@ def weather():
     """
     App route to show weather application
     """
-    
+    ip = request.environ['REMOTE_ADDR']
     g = geocoder.ipinfo('me')
     print(g.ip)
     cur_lat = g.latlng[0]
@@ -58,7 +58,8 @@ def weather():
                            country=country,
                            temp=temp,
                            region=region,
-                           description=description)
+                           description=description,
+                           ip=ip)
 
 
 if __name__ == "__main__":
