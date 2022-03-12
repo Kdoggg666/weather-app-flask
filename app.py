@@ -19,7 +19,7 @@ app.secret_key = os.environ.get("SECRET_KEY")
 @app.route("/weather")
 def weather():
     """
-    App route to show weather application
+    App route to show weather application and pass environment variables
     """
     api_key = os.environ.get("MAPS_API_KEY")
     weather_key = os.environ.get("WEATHER_API_KEY")
