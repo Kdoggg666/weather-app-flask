@@ -2,7 +2,7 @@
 
 Welcome to my weather application.  
   
-A live preview of the web app can be found [Here](https://https://weather-app-flask-kenan.herokuapp.com/) 
+A live preview of the web app can be found [Here](https://weather-app-flask-kenan.herokuapp.com/) 
 
 ## Table of Contents
 
@@ -30,7 +30,7 @@ A live preview of the web app can be found [Here](https://https://weather-app-fl
 <a name="features"></a>
 ## Features
 
-- The site is a simple one page application which gets the users location from the browser, makes a call to the Google Maps api to resolve the coordinates to a city name and finally pushes the city name in an api call to the visual crossing weather api. Once the data is returned in json format the app provied the user with local weather data. 
+- The site is a simple one page application which gets the users location from the browser, makes a call to the Google Maps api to resolve the coordinates to a city name and pushes the coordinates in an api call to the visual crossing weather api. Once the data is returned in json format the app provied the user with local weather data. 
 
 ![Weather page](https://res.cloudinary.com/dyxe4g62g/image/upload/v1647111497/weather-app_xk8lzt.png "Weather(Home) Page")
 
