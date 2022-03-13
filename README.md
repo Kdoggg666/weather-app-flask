@@ -2,7 +2,7 @@
 
 Welcome to my weather application.  
   
-A live preview of the web app can be found [Here](https://https://weather-app-flask-kenan.herokuapp.com/) 
+A live preview of the web app can be found [Here](https://weather-app-flask-kenan.herokuapp.com/) 
 
 ## Table of Contents
 
